@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculate Coin Avgs</title>
+  <title>Calculate Quarterly Averages</title>
   <link rel="apple-touch-icon" sizes="57x57" href="https://calculate-avgs.web.app/icons/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="https://calculate-avgs.web.app/icons/apple-icon-60x60.png">
   <link rel="apple-touch-icon" sizes="72x72" href="https://calculate-avgs.web.app/icons/apple-icon-72x72.png">
@@ -29,7 +29,7 @@
 <body>
   <main class="container mb-3">
     <div id="calculate-avgs">
-      <h1 class="title mt-5">Calculate Averages</h1>
+      <h1 class="title mt-5">Calculate Quarterly Averages</h1>
       <p class="text-muted mb-3">The main objective of this app is to calculate the three averages between given high and low numbers, this will divides the range into quarters.</p>
       <form class="mb-5" @submit.prevent="calculate">
         <div v-if="errors.length">

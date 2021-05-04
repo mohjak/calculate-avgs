@@ -1,89 +1,163 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+<html lang="en">
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/8.4.3/firebase-app.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/8.4.3/firebase-auth.js"></script>
-    <script defer src="/__/firebase/8.4.3/firebase-database.js"></script>
-    <script defer src="/__/firebase/8.4.3/firebase-firestore.js"></script>
-    <script defer src="/__/firebase/8.4.3/firebase-functions.js"></script>
-    <script defer src="/__/firebase/8.4.3/firebase-messaging.js"></script>
-    <script defer src="/__/firebase/8.4.3/firebase-storage.js"></script>
-    <script defer src="/__/firebase/8.4.3/firebase-analytics.js"></script>
-    <script defer src="/__/firebase/8.4.3/firebase-remote-config.js"></script>
-    <script defer src="/__/firebase/8.4.3/firebase-performance.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculate Coin Avgs</title>
+  <link rel="apple-touch-icon" sizes="57x57" href="https://calculate-avgs.web.app/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="https://calculate-avgs.web.app/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="https://calculate-avgs.web.app/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://calculate-avgs.web.app/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="https://calculate-avgs.web.app/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="https://calculate-avgs.web.app/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="https://calculate-avgs.web.app/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="https://calculate-avgs.web.app/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://calculate-avgs.web.app/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="https://calculate-avgs.web.app/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://calculate-avgs.web.app/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="https://calculate-avgs.web.app/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://calculate-avgs.web.app/icons/favicon-16x16.png">
+  <link rel="manifest" href="https://calculate-avgs.web.app/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="https://calculate-avgs.web.app/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+  <link href="style.css" rel="stylesheet">
+</head>
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
+<body>
+  <main class="container mb-3">
+    <div id="calculate-avgs">
+      <h1 class="title mt-5">Calculate Averages</h1>
+      <p class="text-muted mb-3">The main objective of this app is to calculate the three averages between given high and low numbers, this will divides the range into quarters.</p>
+      <form class="mb-5" @submit.prevent="calculate">
+        <div v-if="errors.length">
+          <b>Please correct the following error(s):</b>
+          <ul>
+            <li v-for="error in errors">{{ error }}</li>
+          </ul>
+        </div>
+        
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <input id="high" class="form-control" name="high" type="text" v-model="high" placeholder="Enter high here..." />
+          </div>
+          <div class="col-md-6 mb-3">
+            <input id="low" class="form-control" name="low" type="text" v-model="low" placeholder="Enter low here..." />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <input type="submit" value="Calculate" class="btn btn-success" />
+          <a class="btn btn-default" @click.prevent="clear">Clear</a>
+        </div>
+      </form>
+      
+      <h2 class="mb-3">Averages</h2>
+      
+      <p><strong class="h5">High: </strong><span class="h4 text-warning">{{ highResult }}</span></p>
+      <p><strong class="h5">Avg1: </strong><span class="h4 text-success">{{ avg1Result }}</span></p>
+      <p><strong class="h5">Middle: </strong><span class="h4 text-info">{{ middleResult }}</span></p>
+      <p><strong class="h5">Avg2: </strong><span class="h4 text-success">{{ avg2Result }}</span></p>
+      <p><strong class="h5">Low: </strong><span class="h4 text-warning">{{ lowResult }}</span></p>
     </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+  </main>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+  <footer class="footer">
+    <div class="footer-content container">
+      <p>
+        <strong>Maintained by: </strong> Mohammad Jaqmaqji <a href="mailto:mohjak@gmail.com">mohjak@gmail.com</a> - <strong>Source Code: </strong> <a href="https://github.com/mohjak/calculate-avgs">https://github.com/mohjak/calculate-avgs</a> - <strong>Licensed under: </strong> <a href="https://raw.githubusercontent.com/mohjak/archviz-docs/master/LICENSE?token=AACJEB3T5ARECHETCENENQDATI2SM">MIT</a> license.
+      </p>
+      <p>
+        Found this app useful, consider making a small donation 
+				<span>
+					<style type="text/css"> .btcpay-form { display: inline-flex; align-items: center; justify-content: center; } .btcpay-form--inline { flex-direction: row; } .btcpay-form--block { flex-direction: column; } .btcpay-form--inline .submit { margin-left: 15px; } .btcpay-form--block select { margin-bottom: 10px; } .btcpay-form .btcpay-custom-container{ text-align: center; }.btcpay-custom { display: flex; align-items: center; justify-content: center; } .btcpay-form .plus-minus { cursor:pointer; font-size:25px; line-height: 25px; background: #DFE0E1; height: 30px; width: 45px; border:none; border-radius: 60px; margin: auto 5px; display: inline-flex; justify-content: center; } .btcpay-form select { -moz-appearance: none; -webkit-appearance: none; appearance: none; color: currentColor; background: transparent; border:1px solid transparent; display: block; padding: 1px; margin-left: auto; margin-right: auto; font-size: 11px; cursor: pointer; } .btcpay-form select:hover { border-color: #ccc; } #btcpay-input-price { -moz-appearance: none; -webkit-appearance: none; border: none; box-shadow: none; text-align: center; font-size: 25px; margin: auto; border-radius: 5px; line-height: 35px; background: #fff; } #btcpay-input-price::-webkit-outer-spin-button, #btcpay-input-price::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; } </style>
+					<form method="POST"  action="https://testnet.demo.btcpayserver.org/api/v1/invoices" class="btcpay-form btcpay-form--block">
+						<input type="hidden" name="storeId" value="CMCefTvLeHs3zjt8pavqkzZoRQEEbvHsBcB2gJMcgdUx" />
+						<input type="hidden" name="browserRedirect" value="https://calculate-avgs.web.app/thank-you.html" />
+						<input type="hidden" name="notifyEmail" value="mohjak@gmail.com" />
+						<input type="hidden" name="price" value="10" />
+						<input type="hidden" name="currency" value="USD" />
+						<input type="image" class="submit" name="submit" src="https://testnet.demo.btcpayserver.org/img/paybutton/pay.svg" style="width:146px" alt="Pay with BtcPay, Self-Hosted Bitcoin Payment Processor">
+					</form>.
+				</span>
+      </p>
+    </div>
 
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/vue@3"></script>
+  <script>
+    function result(n) {
+      return !isNaN(parseFloat(n).toFixed(4)) ? parseFloat(n).toFixed(4) : '' 
+    }
+
+    const calculateAvgs = Vue.createApp({
+      data() {
+        return {
+          errors: [],
+          high: '',
+          low: '',
+          middle: '',
+          avg1: '',
+          avg2: ''
         }
-      });
-    </script>
-  </body>
+      },
+
+      computed: {
+        highResult() {
+          return result(this.high) 
+        },
+        avg1Result() {
+          return result(this.avg1)
+        },
+        middleResult() {
+          return result(this.middle)
+        },
+        avg2Result() {
+          return result(this.avg2)
+        },
+        lowResult() {
+          return result(this.low)
+        }
+      },
+
+      methods: {
+        checkForm() {
+          this.errors = []
+          if (!this.high) {
+            this.errors.push('High required.')
+          }
+          
+          if (!this.low) {
+            this.errors.push('Low required.')
+          }
+
+          if (parseFloat(this.high) < parseFloat(this.low)) {
+            this.errors.push('High is less than low.')
+          }
+        },
+
+        calculate() {
+          this.checkForm()
+          this.middle = (parseFloat(this.high) + parseFloat(this.low)) / 2
+          this.avg1 = (this.middle + parseFloat(this.high)) / 2
+          this.avg2 = (this.middle + parseFloat(this.low)) / 2
+        },
+
+        clear() {
+          this.errors = []
+          this.high = ''
+          this.low = ''
+          this.middle = ''
+          this.avg1 = ''
+          this.avg2 = ''
+        }
+      }
+    })
+    .mount('#calculate-avgs')
+  </script>
+</body>
 </html>

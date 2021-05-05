@@ -1,5 +1,7 @@
 # Calculate Quarterly Averages
 
+[https://calculate-avgs.web.app/](https://calculate-avgs.web.app/)
+
 The main objective of this app is to calculate the three averages between given high and low numbers, this will divide the range into quarters.
 
 This is a powerful technical analysis tool in either cryptocurrencies or stock trading, the generated numbers define key levels of support and resistance that will effectively work to place orders.
@@ -12,14 +14,18 @@ No Investment Advice The information provided on this website does not constitut
 
 # Releases
 
-- 0.1.0
-  Contains basic quarterly averages calculation functionality.
+## 0.1.0
 
-- 0.1.1
-  Enhance readme layou.
+- Contains basic quarterly averages calculation functionality.
 
-- 0.1.2
-  Changed width of donation QR images.
+## 0.1.1
+
+- Enhance readme layou.
+
+## 0.1.2
+
+- Changed width of donation QR images.
+- Added website link to Readme.md file.
 
 # License
 
@@ -37,7 +43,7 @@ No Investment Advice The information provided on this website does not constitut
 <span class="text-warning">bc1qq3k8z2e7vrdrz9qq4wpppf3cg06y63gmrtzemh</span><br>
 <a href="https://link.trustwallet.com/send?coin=0&address=bc1qq3k8z2e7vrdrz9qq4wpppf3cg06y63gmrtzemh">Trust Wallet</a>
 
-<strong>LTC</strong><br><br>
+<strong>LTC</strong><br>
 <img src="public/donate/ltc-address.jpg" alt="ltc-address" width="120"><br>
 <span>ltc1qgxxpq0m3pdy86jdxqpt7uml0l86d50957wf8p2</span><br>
 <a href="https://link.trustwallet.com/send?coin=2&address=ltc1qgxxpq0m3pdy86jdxqpt7uml0l86d50957wf8p2">Trust Wallet</a>

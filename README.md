@@ -15,6 +15,9 @@ No Investment Advice The information provided on this website does not constitut
 - 0.1.0
   Contains basic quarterly averages calculation functionality.
 
+- 0.1.1
+  Enhance readme layou.
+
 # License
 
 [MIT](LICENSE).

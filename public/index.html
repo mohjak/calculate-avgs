@@ -43,7 +43,7 @@
         
         <div class="row">
           <div class="col-md-6 mb-3">
-            <input id="high" class="form-control" name="high" type="text" v-model="high" placeholder="Enter high here..." @keypress="isNumber($event)" />
+            <input id="high" ref="high" class="form-control" name="high" type="text" v-model="high" placeholder="Enter high here..." @keypress="isNumber($event)" />
           </div>
           <div class="col-md-6 mb-3">
             <input id="low" class="form-control" name="low" type="text" v-model="low" placeholder="Enter low here..." />
@@ -178,15 +178,23 @@
           this.avg2 = ''
         },
 
-        isNumber: function(evt) {
-          evt = (evt) ? evt : window.event;
-          var charCode = (evt.which) ? evt.which : evt.keyCode;
+        isNumber(evt) {
+          evt = (evt) ? evt : window.event
+          var charCode = (evt.which) ? evt.which : evt.keyCode
           if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
-            evt.preventDefault();;
+            evt.preventDefault()
           } else {
-            return true;
+            return true
           }
+        },
+
+        focusHigh() {
+          this.$refs.high.focus()
         }
+      },
+
+      mounted() {
+        this.focusHigh()
       }
     })
     .mount('#calculate-avgs')

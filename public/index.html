@@ -5,22 +5,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calculate Quarterly Averages</title>
-  <link rel="apple-touch-icon" sizes="57x57" href="https://calculate-avgs.web.app/icons/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="https://calculate-avgs.web.app/icons/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="https://calculate-avgs.web.app/icons/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="https://calculate-avgs.web.app/icons/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="https://calculate-avgs.web.app/icons/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="https://calculate-avgs.web.app/icons/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="https://calculate-avgs.web.app/icons/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="https://calculate-avgs.web.app/icons/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://calculate-avgs.web.app/icons/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192"  href="https://calculate-avgs.web.app/icons/android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="https://calculate-avgs.web.app/icons/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="https://calculate-avgs.web.app/icons/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="https://calculate-avgs.web.app/icons/favicon-16x16.png">
-  <link rel="manifest" href="https://calculate-avgs.web.app/icons/manifest.json">
+  <link rel="apple-touch-icon" sizes="57x57" href="./icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="./icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="./icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="./icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="./icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="./icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="./icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="./icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="./icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="./icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./icons/favicon-16x16.png">
+  <link rel="manifest" href="./manifest.json">
   <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="https://calculate-avgs.web.app/icons/ms-icon-144x144.png">
+  <meta name="msapplication-TileImage" content="./icons/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
   <link href="style.css" rel="stylesheet">
@@ -28,10 +28,12 @@
 
 <body>
   <main class="container mb-3">
-    <div id="calculate-avgs">
+    <div id="calculate-avgs" class="mb-3">
       <h1 class="title mt-5">Calculate Quarterly Averages</h1>
-      <p class="text-muted mb-3">The main objective of this app is to calculate the three averages between given high and low numbers, this will divides the range into quarters.</p>
-      <form class="mb-5" @submit.prevent="calculate">
+      <p class="text-muted">The main objective of this app is to calculate the three averages between given high and low numbers, this will divide the range into quarters.</p>
+      <p class="text-muted">This is a powerful technical analysis tool in either cryptocurrencies or stock trading, the generated numbers define key levels of support and resistance that will effectively work when making decisions to place orders.</p>
+      <p class="text-muted">Generally, the chart moves somewhat in a systematic way, so that, quarterly averages exist to not help to illustrate levels in the current month but to predict the next price behave (Up or Down) by the end of the month under study and start of the next one.</p>
+      <form class="mb-3" @submit.prevent="calculate">
         <div v-if="errors.length">
           <b>Please correct the following error(s):</b>
           <ul>
@@ -41,7 +43,7 @@
         
         <div class="row">
           <div class="col-md-6 mb-3">
-            <input id="high" class="form-control" name="high" type="text" v-model="high" placeholder="Enter high here..." />
+            <input id="high" class="form-control" name="high" type="text" v-model="high" placeholder="Enter high here..." @keypress="isNumber($event)" />
           </div>
           <div class="col-md-6 mb-3">
             <input id="low" class="form-control" name="low" type="text" v-model="low" placeholder="Enter low here..." />
@@ -54,37 +56,55 @@
         </div>
       </form>
       
-      <h2 class="mb-3">Averages</h2>
-      
-      <p><strong class="h5">High: </strong><span class="h4 text-warning">{{ highResult }}</span></p>
-      <p><strong class="h5">Avg1: </strong><span class="h4 text-success">{{ avg1Result }}</span></p>
-      <p><strong class="h5">Middle: </strong><span class="h4 text-info">{{ middleResult }}</span></p>
-      <p><strong class="h5">Avg2: </strong><span class="h4 text-success">{{ avg2Result }}</span></p>
-      <p><strong class="h5">Low: </strong><span class="h4 text-warning">{{ lowResult }}</span></p>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Averages</h5>
+          <p><strong>High: </strong><span class="h4 text-warning">{{ highResult }}</span></p>
+          <p><strong>Avg1: </strong><span class="h4 text-success">{{ avg1Result }}</span></p>
+          <p><strong>Middle: </strong><span class="h4 text-info">{{ middleResult }}</span></p>
+          <p><strong>Avg2: </strong><span class="h4 text-success">{{ avg2Result }}</span></p>
+          <p><strong>Low: </strong><span class="h4 text-warning">{{ lowResult }}</span></p>
+        </div>
+      </div>
+
+      <div class="text-muted">
+        <h4 class="text-danger">Disclaimer</h4>
+        No Investment Advice
+        The information provided on this website does not constitute investment advice, financial advice, trading advice, or any other sort of advice and you should not treat any of the website's content as such. Alternative.me does not recommend that any cryptocurrency should be bought, sold, or held by you. Do conduct your own due diligence and consult your financial advisor before making any investment decisions.
+      </div>
+  
     </div>
   </main>
 
   <footer class="footer text-muted">
-    <div class="footer-content container">
+    <div class="container">
       <p>
         <strong>Maintained by: </strong> Mohammad Jaqmaqji <a href="mailto:mohjak@gmail.com">mohjak@gmail.com</a> - <strong>Source Code: </strong> <a href="https://github.com/mohjak/calculate-avgs">https://github.com/mohjak/calculate-avgs</a> - <strong>Licensed under: </strong> <a href="https://raw.githubusercontent.com/mohjak/archviz-docs/master/LICENSE?token=AACJEB3T5ARECHETCENENQDATI2SM">MIT</a> license.
       </p>
       <p>
         Found this app useful, consider making a donation 
-				<span>
-					<style type="text/css"> .btcpay-form { display: inline-flex; align-items: center; justify-content: center; } .btcpay-form--inline { flex-direction: row; } .btcpay-form--block { flex-direction: column; } .btcpay-form--inline .submit { margin-left: 15px; } .btcpay-form--block select { margin-bottom: 10px; } .btcpay-form .btcpay-custom-container{ text-align: center; }.btcpay-custom { display: flex; align-items: center; justify-content: center; } .btcpay-form .plus-minus { cursor:pointer; font-size:25px; line-height: 25px; background: #DFE0E1; height: 30px; width: 45px; border:none; border-radius: 60px; margin: auto 5px; display: inline-flex; justify-content: center; } .btcpay-form select { -moz-appearance: none; -webkit-appearance: none; appearance: none; color: currentColor; background: transparent; border:1px solid transparent; display: block; padding: 1px; margin-left: auto; margin-right: auto; font-size: 11px; cursor: pointer; } .btcpay-form select:hover { border-color: #ccc; } #btcpay-input-price { -moz-appearance: none; -webkit-appearance: none; border: none; box-shadow: none; text-align: center; font-size: 25px; margin: auto; border-radius: 5px; line-height: 35px; background: #fff; } #btcpay-input-price::-webkit-outer-spin-button, #btcpay-input-price::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; } </style>
-					<form method="POST"  action="https://testnet.demo.btcpayserver.org/api/v1/invoices" class="btcpay-form btcpay-form--block">
-						<input type="hidden" name="storeId" value="CMCefTvLeHs3zjt8pavqkzZoRQEEbvHsBcB2gJMcgdUx" />
-						<input type="hidden" name="browserRedirect" value="https://calculate-avgs.web.app/thank-you.html" />
-						<input type="hidden" name="notifyEmail" value="mohjak@gmail.com" />
-						<input type="hidden" name="price" value="10" />
-						<input type="hidden" name="currency" value="USD" />
-						<input type="image" class="submit" name="submit" src="https://testnet.demo.btcpayserver.org/img/paybutton/pay.svg" style="width:146px" alt="Pay with BtcPay, Self-Hosted Bitcoin Payment Processor">
-					</form>.
-				</span>
+				<div class="row">
+          <div class="col mb-3">
+            <strong class="text-success">USDT (TRC20)</strong><br>
+            <img style="width: 6rem;" src="./donate/usdt-trc20-address.jpg" alt="usdt-trc20-address"><br>
+            <span class="text-success">TJWuuwGje12VkHjvQ9uhNjnyVvREAHQ9Z4</span><br>
+            <a href="https://link.trustwallet.com/send?coin=195&address=TJWuuwGje12VkHjvQ9uhNjnyVvREAHQ9Z4&token_id=TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t">Trust Wallet</a>
+          </div>
+          <div class="col mb-3">
+            <strong class="text-warning">BTC</strong><br>
+            <img style="width: 6rem;" src="./donate/btc-address.jpg" alt="btc-address"><br>
+            <span class="text-warning">bc1qq3k8z2e7vrdrz9qq4wpppf3cg06y63gmrtzemh</span><br>
+            <a href="https://link.trustwallet.com/send?coin=0&address=bc1qq3k8z2e7vrdrz9qq4wpppf3cg06y63gmrtzemh">Trust Wallet</a>
+          </div>
+          <div class="col mb-3">
+            <strong class="text-primary">LTC</strong><br><br>
+            <img style="width: 6rem" src="./donate/ltc-address.jpg" alt="ltc-address"><br>
+            <span class="text-primary">ltc1qgxxpq0m3pdy86jdxqpt7uml0l86d50957wf8p2</span><br>
+            <a href="https://link.trustwallet.com/send?coin=2&address=ltc1qgxxpq0m3pdy86jdxqpt7uml0l86d50957wf8p2">Trust Wallet</a>
+          </div>
+        </div>
       </p>
     </div>
-
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
@@ -154,6 +174,16 @@
           this.middle = ''
           this.avg1 = ''
           this.avg2 = ''
+        },
+
+        isNumber: function(evt) {
+          evt = (evt) ? evt : window.event;
+          var charCode = (evt.which) ? evt.which : evt.keyCode;
+          if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+            evt.preventDefault();;
+          } else {
+            return true;
+          }
         }
       }
     })

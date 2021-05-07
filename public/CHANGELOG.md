@@ -16,3 +16,8 @@
 ## 0.1.3
 
 - Focussed high input field.
+
+## 0.1.4
+
+- Added more decimal digits to results.
+- Introduce two new numbers Ext. High 1 & Ext. High 2.

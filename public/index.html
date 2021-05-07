@@ -34,7 +34,7 @@
       <p class="text-muted">This is a powerful technical analysis tool in either cryptocurrencies or stock trading, the generated numbers define key levels of support and resistance that will effectively work when making decisions to place orders.</p>
       <p class="text-muted">Generally, the chart moves somewhat in a systematic way, so that, quarterly averages exist to not help to illustrate levels in the current month but to predict the next price behave (Up or Down) by the end of the month under study and start of the next one.</p>
       <form class="mb-3" @submit.prevent="calculate">
-        <div v-if="errors.length">
+        <div v-if="errors.length" class="text-danger">
           <b>Please correct the following error(s):</b>
           <ul>
             <li v-for="error in errors">{{ error }}</li>
@@ -59,9 +59,11 @@
       <div class="card mb-3">
         <div class="card-body">
           <h5 class="card-title">Averages</h5>
+          <p><strong>Ext. High 2: </strong><span class="h4 text-info">{{ extHigh2Result }}</span></p>
+          <p><strong>Ext. High 1: </strong><span class="h4 text-info">{{ extHigh1Result }}</span></p>
           <p><strong>High: </strong><span class="h4 text-warning">{{ highResult }}</span></p>
           <p><strong>Avg1: </strong><span class="h4 text-success">{{ avg1Result }}</span></p>
-          <p><strong>Middle: </strong><span class="h4 text-info">{{ middleResult }}</span></p>
+          <p><strong>Middle: </strong><span class="h4 text-primary">{{ middleResult }}</span></p>
           <p><strong>Avg2: </strong><span class="h4 text-success">{{ avg2Result }}</span></p>
           <p><strong>Low: </strong><span class="h4 text-warning">{{ lowResult }}</span></p>
         </div>
@@ -113,13 +115,15 @@
   <script src="https://unpkg.com/vue@3"></script>
   <script>
     function result(n) {
-      return !isNaN(parseFloat(n).toFixed(4)) ? parseFloat(n).toFixed(4) : '' 
+      return !isNaN(parseFloat(n).toFixed(20)) ? parseFloat(n).toFixed(20) : '' 
     }
 
     const calculateAvgs = Vue.createApp({
       data() {
         return {
           errors: [],
+          extHigh2: '',
+          extHigh1: '',
           high: '',
           low: '',
           middle: '',
@@ -129,6 +133,12 @@
       },
 
       computed: {
+        extHigh2Result() {
+          return result(this.extHigh2)
+        },
+        extHigh1Result() {
+          return result(this.extHigh1)
+        },
         highResult() {
           return result(this.high) 
         },
@@ -167,6 +177,8 @@
           this.middle = (parseFloat(this.high) + parseFloat(this.low)) / 2
           this.avg1 = (this.middle + parseFloat(this.high)) / 2
           this.avg2 = (this.middle + parseFloat(this.low)) / 2
+          this.extHigh1 = ((parseFloat(this.high)) - this.avg1) + (parseFloat(this.high))
+          this.extHigh2 = (this.extHigh1 - (parseFloat(this.high))) + this.extHigh1
         },
 
         clear() {

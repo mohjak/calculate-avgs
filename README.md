@@ -10,7 +10,17 @@ Generally, the chart moves somewhat in a systematic way, so that, quarterly aver
 
 # Disclaimer
 
-No Investment Advice The information provided on this website does not constitute investment advice, financial advice, trading advice, or any other sort of advice and you should not treat any of the website's content as such. Alternative.me does not recommend that any cryptocurrency should be bought, sold, or held by you. Do conduct your own due diligence and consult your financial advisor before making any investment decisions.
+Before using this website, please make sure that you note the following important information.
+
+[https://calculate-avgs.web.app](https://calculate-avgs.web.app) is not a registered investment, legal or tax advisor or a broker/dealer. All investment/financial opinions expressed by [https://calculate-avgs.web.app](https://calculate-avgs.web.app) are from the personal research and experience of the owner of the website and are intended as educational and informational material. Although best efforts are made to ensure that all information is accurate and up to date, occasionally unintended errors, omissions, and misprints may occur.
+
+**Your investments are your responsibility:** We do not accept any liability for any loss or damage which is incurred from you acting or not acting as a result of reading any of our publications. You acknowledge that you use the information we provide at your own risk.
+
+**Information, not advice or recommendations:** the information contained on this website and the resources available for download (if any) through this website is not intended as, and shall not be understood or construed as, financial advice. We are not lawyers, accountants, or financial advisors, nor are we holding ourselves out to be, and the information contained on this website is not a substitute for financial advice from a professional who is aware of the facts and circumstances of your individual situation.
+
+**Do your own research:** the content of this website is intended to be used and must be used for informational purposes only. It is very important to do your own analysis before making any investment based on your own personal circumstances. You should take independent financial advice from a professional in connection with, or independently research and verify, any information that you find on this website and wish to rely upon, whether for the purpose of making an investment decision or otherwise.
+
+Regardless of anything to the contrary, nothing available on or through this website should be understood as a recommendation that you should not consult with a financial professional or any other professional as the case maybe to address your information.
 
 # License
 

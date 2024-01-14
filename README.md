@@ -2,13 +2,13 @@
 
 [https://calculate-avgs.web.app/](https://calculate-avgs.web.app/)
 
-The main objective of this app is to calculate the three averages between given high and low numbers, this will divide the range into quarters.
+The primary goal of this application is to accurately compute three distinct averages within the specified range of high and low values, effectively segmenting the range into quarters. This division enhances the precision of the analysis.
 
-This is a powerful technical analysis tool in either cryptocurrencies or stock trading, the generated numbers define key levels of support and resistance that will effectively work to place orders.
+Serving as a robust tool for technical analysis in both cryptocurrency and stock trading markets, this application generates critical numbers that demarcate essential support and resistance levels. These levels are instrumental in strategizing order placements, thereby optimizing trading decisions.
 
-Generally, the chart moves somewhat in a systematic way, so that, quarterly averages exist to not help to illustrate levels in the current month but to predict the next price behave Up or Down by the end of the month under study and start of the next one.
+Typically, market charts exhibit a patterned movement, which this application leverages by calculating quarterly averages. These averages are not only crucial for delineating current monthly levels but also play a pivotal role in forecasting the directional trend—whether upward or downward—of prices at the close of the current month and the onset of the subsequent one.
 
-# Disclaimer
+## Disclaimer
 
 Before using this website, please make sure that you note the following important information.
 
@@ -22,11 +22,11 @@ Before using this website, please make sure that you note the following importan
 
 Regardless of anything to the contrary, nothing available on or through this website should be understood as a recommendation that you should not consult with a financial professional or any other professional as the case maybe to address your information.
 
-# License
+## License
 
 [MIT](LICENSE).
 
-# Donate
+## Donate
 
 <strong>USDT (TRC20)</strong><br>
 <img src="public/donate/usdt-trc20-address.jpg" alt="usdt-trc20-address" width="120"><br>
